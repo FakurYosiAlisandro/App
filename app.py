@@ -1,6 +1,6 @@
 from flask import Flask,redirect,url_for,render_template,request
 from werkzeug.utils import secure_filename
-import requests,os
+import os
 
 app=Flask(__name__)
 
