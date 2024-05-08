@@ -4,16 +4,38 @@
     <title>File Uploader</title>
 </head>
 <body>
-    <h1>Uploaded Files:</h1>
+    <h1>Upload Files:</h1>
+    <h2>Upload Image:</h2>
+    <form action="/upload_image" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload Image">
+    </form>
+
+    <h2>Upload Video:</h2>
+    <form action="/upload_video" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload Video">
+    </form>
+
+    <h2>Upload Model:</h2>
+    <form action="/upload_model" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload Model">
+    </form>
+
+    <h2>Uploaded Files:</h2>
     <ul>
         {% for file in uploads %}
             <li>{{ file }}</li>
-            <img src="/static/{{ file }}" alt="Uploaded Image" />
+            {% if file.endswith('.mp4') %}
+                <video width="320" height="240" controls>
+                    <source src="/static/{{ file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <img src="/static/{{ file }}" alt="" />
+            {% endif %}
         {% endfor %}
     </ul>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
 </body>
 </html>
